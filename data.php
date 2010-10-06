@@ -1,5 +1,7 @@
 <?php
 
+include_once 'config.inc.php';
+
 $mounthlist = array(1 => 'Январь',
                     2 => 'Февраль',
                     3 => 'Март',
@@ -34,8 +36,8 @@ $data['ip'] = $_SERVER['REMOTE_ADDR'];
 $data['date'] = date('Y-m-d H:i:s');
 
 
-$link = mysql_connect('localhost', 'root', '');
-mysql_select_db('schedule',$link);
+$link = mysql_connect($mysql['host'], $mysql['user'], $mysql['pass']);
+mysql_select_db($mysql['database'],$link);
 
 if ($data['name'] && $data['group']){
 $sql = "INSERT INTO data
@@ -46,7 +48,7 @@ $res = mysql_query($sql);
 
 //print_r($sql);
 
-$sql = "SELECT * FROM data WHERE mounth={$data['mounth']} AND year={$data['year']} ORDER BY mounth";
+$sql = "SELECT * FROM data WHERE mounth=$mounth AND year=$year AND floor=$floor ORDER BY day";
 $res = mysql_query($sql);
 
 while ($row=mysql_fetch_row($res)) {
@@ -82,7 +84,7 @@ while ($row=mysql_fetch_row($res)) {
                 <tr>
                     <td style="width: 80px; text-align: center;">
                         <form action="data.php" method="POST" style="height: 10px;">
-                            <input type="hidden" name="floor" value="4">
+                            <input type="hidden" name="floor" value="<?php echo $floor; ?>">
                             <input type="hidden" name="mounth" value="<?php echo $prevmounth; ?>">
                             <input type="hidden" name="year" value="<?php echo $prevyear; ?>">
                             <input type="submit" value="<?php echo $mounthlist["$prevmounth"]; ?>">
@@ -91,7 +93,7 @@ while ($row=mysql_fetch_row($res)) {
                     <td style="width: 150px; text-align: center;"><h1> <?php echo $mounthlist["$mounth"]; ?> </h1></td>
                     <td style="width: 80px; text-align: center;">
                         <form action="data.php" method="POST" style="height: 10px;">
-                            <input type="hidden" name="floor" value="4">
+                            <input type="hidden" name="floor" value="<?php echo $floor; ?>">
                             <input type="hidden" name="mounth" value="<?php echo $nextmounth; ?>">
                             <input type="hidden" name="year" value="<?php echo $nextyear; ?>">
                             <input type="submit" value="<?php echo $mounthlist["$nextmounth"]; ?>">

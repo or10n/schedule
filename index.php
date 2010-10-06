@@ -46,10 +46,58 @@ $mounthlist = array(1 => 'Январь',
                 <input type="submit" value="&nbsp;5 этаж&nbsp;">
             </form>
             <form action="data.php" method="POST" style="height: 10px;">
+                <input type="hidden" name="floor" value="6">
+                <input type="hidden" name="mounth" value="<?php echo date('m'); ?>">
+                <input type="hidden" name="year" value="<?php echo date('Y'); ?>">
+                <input type="submit" value="&nbsp;6 этаж&nbsp;">
+            </form>
+            <form action="data.php" method="POST" style="height: 10px;">
+                <input type="hidden" name="floor" value="7">
+                <input type="hidden" name="mounth" value="<?php echo date('m'); ?>">
+                <input type="hidden" name="year" value="<?php echo date('Y'); ?>">
+                <input type="submit" value="&nbsp;7 этаж&nbsp;">
+            </form>
+            <form action="data.php" method="POST" style="height: 10px;">
+                <input type="hidden" name="floor" value="8">
+                <input type="hidden" name="mounth" value="<?php echo date('m'); ?>">
+                <input type="hidden" name="year" value="<?php echo date('Y'); ?>">
+                <input type="submit" value="&nbsp;8 этаж&nbsp;">
+            </form>
+            <form action="data.php" method="POST" style="height: 10px;">
+                <input type="hidden" name="floor" value="9">
+                <input type="hidden" name="mounth" value="<?php echo date('m'); ?>">
+                <input type="hidden" name="year" value="<?php echo date('Y'); ?>">
+                <input type="submit" value="&nbsp;9 этаж&nbsp;">
+            </form>
+            <form action="data.php" method="POST" style="height: 10px;">
+                <input type="hidden" name="floor" value="10">
+                <input type="hidden" name="mounth" value="<?php echo date('m'); ?>">
+                <input type="hidden" name="year" value="<?php echo date('Y'); ?>">
+                <input type="submit" value="10 этаж">
+            </form>
+            <form action="data.php" method="POST" style="height: 10px;">
+                <input type="hidden" name="floor" value="11">
+                <input type="hidden" name="mounth" value="<?php echo date('m'); ?>">
+                <input type="hidden" name="year" value="<?php echo date('Y'); ?>">
+                <input type="submit" value="11 этаж">
+            </form>
+            <form action="data.php" method="POST" style="height: 10px;">
                 <input type="hidden" name="floor" value="12">
                 <input type="hidden" name="mounth" value="<?php echo date('m'); ?>">
                 <input type="hidden" name="year" value="<?php echo date('Y'); ?>">
                 <input type="submit" value="12 этаж">
+            </form>
+            <form action="data.php" method="POST" style="height: 10px;">
+                <input type="hidden" name="floor" value="13">
+                <input type="hidden" name="mounth" value="<?php echo date('m'); ?>">
+                <input type="hidden" name="year" value="<?php echo date('Y'); ?>">
+                <input type="submit" value="13 этаж">
+            </form>
+            <form action="data.php" method="POST" style="height: 10px;">
+                <input type="hidden" name="floor" value="14">
+                <input type="hidden" name="mounth" value="<?php echo date('m'); ?>">
+                <input type="hidden" name="year" value="<?php echo date('Y'); ?>">
+                <input type="submit" value="14 этаж">
             </form>
         </center>
 
