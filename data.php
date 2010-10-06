@@ -182,6 +182,6 @@ while ($row=mysql_fetch_row($res)) {
         </table>
         </center>
 
-
+        <center>Alexander Randa (c) 2010</center>
     </body>
 </html>
