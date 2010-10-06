@@ -18,6 +18,11 @@ $mounthlist = array(1 => 'Январь',
 //$mounth = '10';
 //$year = '2010';
 
+if(!$_POST['floor'] || !$_POST['mounth'] || !$_POST['year']){
+    header('Location: http://schedule.hna.net');
+    exit;
+}
+
 $floor = $_POST['floor'];
 $mounth = $_POST['mounth'];
 $year = $_POST['year'];
@@ -32,6 +37,7 @@ $data['day'] = (int)$_POST['day'];
 $data['shift'] = (int)$_POST['shift'];
 $data['name'] = addslashes($_POST['name']);
 $data['group'] = addslashes($_POST['group']);
+$data['room'] = addslashes($_POST['room']);
 $data['ip'] = $_SERVER['REMOTE_ADDR'];
 $data['date'] = date('Y-m-d H:i:s');
 
@@ -41,8 +47,8 @@ mysql_select_db($mysql['database'],$link);
 
 if ($data['name'] && $data['group']){
 $sql = "INSERT INTO data
-        (`day`,`mounth`,`year`,`floor`,`shift`,`name`,`group`,`ip`,`date`)
-        VALUES ({$data['day']},{$data['mounth']},{$data['year']},{$data['floor']},{$data['shift']},'{$data['name']}','{$data['group']}','{$data['ip']}','{$data['date']}');";
+        (`day`,`mounth`,`year`,`floor`,`shift`,`name`,`group`,`room`,`ip`,`date`)
+        VALUES ({$data['day']},{$data['mounth']},{$data['year']},{$data['floor']},{$data['shift']},'{$data['name']}','{$data['group']}','{$data['room']}','{$data['ip']}','{$data['date']}');";
 $res = mysql_query($sql);
 }
 
@@ -55,8 +61,9 @@ while ($row=mysql_fetch_row($res)) {
 
     $data["{$row['4']}"]['name']["{$row['0']}"] = $row['5'];
     $data["{$row['4']}"]['group']["{$row['0']}"] = $row['6'];
-    $data["{$row['4']}"]['ip']["{$row['0']}"] = $row['7'];
-    $data["{$row['4']}"]['date']["{$row['0']}"] = $row['8'];
+    $data["{$row['4']}"]['room']["{$row['0']}"] = $row['7'];
+    $data["{$row['4']}"]['ip']["{$row['0']}"] = $row['8'];
+    $data["{$row['4']}"]['date']["{$row['0']}"] = $row['9'];
 
 }
 //print_r($data);
@@ -90,7 +97,7 @@ while ($row=mysql_fetch_row($res)) {
                             <input type="submit" value="<?php echo $mounthlist["$prevmounth"]; ?>">
                         </form>
                     </td>
-                    <td style="width: 150px; text-align: center;"><h1> <?php echo $mounthlist["$mounth"]; ?> </h1></td>
+                    <td style="width: 150px; text-align: center;"><h1 style="margin-bottom: 0px;"> <?php echo $mounthlist["$mounth"]; ?> </h1></td>
                     <td style="width: 80px; text-align: center;">
                         <form action="data.php" method="POST" style="height: 10px;">
                             <input type="hidden" name="floor" value="<?php echo $floor; ?>">
@@ -101,14 +108,37 @@ while ($row=mysql_fetch_row($res)) {
                     </td>
                 </tr>
             </table>
+            <hr width="95%" noshade>
         <table>
             <tr>
                 <td></td>
-                <td style="text-align: center;">Первая смена (08-00 - 16-00)</td>
+                <td style="text-align: center;"><b><h3 style="margin-bottom: 5px; margin-top: 0px;">Первая смена (08-00 - 16-00)</h3></b></td>
                 <td></td>
-                <td style="text-align: center;">Вторая смена (16-00 - 24-00)</td>
+                <td style="text-align: center;"><b><h3 style="margin-bottom: 5px; margin-top: 0px;">Вторая смена (16-00 - 24-00)</h3></b></td>
             </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <table>
+                        <tr>
+                            <td style="width: 235px; text-align: center;">Фамилия Имя Отчество</td>
+                            <td style="width: 85px; text-align: center;">Группа</td>
+                            <td style="width: 50px; text-align: center;">Комн.</td>
+                        </tr>
+                    </table>
+                </td>
+                <td></td>
+                <td>
+                    <table>
+                        <tr>
+                            <td style="width: 235px; text-align: center;">Фамилия Имя Отчество</td>
+                            <td style="width: 85px; text-align: center;">Группа</td>
+                            <td style="width: 50px; text-align: center;">Комн.</td>
+                        </tr>
+                    </table>
+                </td>
 
+            </tr>
         <?php for($i=1;$i<=cal_days_in_month(CAL_GREGORIAN, $mounth, $year);$i++){ ?>
 
             <tr>
@@ -122,8 +152,9 @@ while ($row=mysql_fetch_row($res)) {
                         <input type="hidden" name="shift" value="1">
                         <input type="text" name="name" value="<?php echo $data['1']['name'][$i]; ?>" size="35px">
                         <input type="text" name="group" value="<?php echo $data['1']['group'][$i]; ?>" size="10px">
+                        <input type="text" name="room" value="<?php echo $data['1']['room'][$i]; ?>" size="4px">
                         <?php if (!$data['1']['name'][$i]) { ?>
-                            <input type="submit" value="Save">
+                            <input type="submit" value="Сохранить">
                         <?php } ?>
                     </form>
                 </td>
@@ -139,8 +170,9 @@ while ($row=mysql_fetch_row($res)) {
                         <input type="hidden" name="shift" value="2">
                         <input type="text" name="name" value="<?php echo $data['2']['name'][$i]; ?>" size="35px">
                         <input type="text" name="group" value="<?php echo $data['2']['group'][$i]; ?>" size="10px">
+                        <input type="text" name="room" value="<?php echo $data['2']['room'][$i]; ?>" size="4px">
                         <?php if (!$data['2']['name'][$i]) { ?>
-                            <input type="submit" value="Save">
+                            <input type="submit" value="Сохранить">
                         <?php } ?>
                     </form>
                 </td>
