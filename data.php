@@ -109,7 +109,7 @@ while ($row=mysql_fetch_row($res)) {
                 <td style="text-align: center;">Вторая смена (16-00 - 24-00)</td>
             </tr>
 
-        <?php for($i=1;$i<=31;$i++){ ?>
+        <?php for($i=1;$i<=cal_days_in_month(CAL_GREGORIAN, $mounth, $year);$i++){ ?>
 
             <tr>
                 <td><?php echo $i; ?></td>
