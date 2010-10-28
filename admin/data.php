@@ -91,10 +91,14 @@ $link = mysql_connect($mysql['host'], $mysql['user'], $mysql['pass']);
 mysql_select_db($mysql['database'],$link);
 
 if ($data['name'] && $data['group']){
-$sql = "INSERT INTO data
-        (`day`,`mounth`,`year`,`floor`,`shift`,`name`,`group`,`room`,`ip`,`date`)
-        VALUES ({$data['day']},{$data['mounth']},{$data['year']},{$data['floor']},{$data['shift']},'{$data['name']}','{$data['group']}','{$data['room']}','{$data['ip']}','{$data['date']}');";
-$res = mysql_query($sql);
+    
+    $sql = "INSERT INTO data
+            (`day`,`mounth`,`year`,`floor`,`shift`,`name`,`group`,`room`,`ip`,`date`)
+            VALUES ({$data['day']},{$data['mounth']},{$data['year']},{$data['floor']},{$data['shift']},'{$data['name']}','{$data['group']}','{$data['room']}','{$data['ip']}','{$data['date']}')
+            ON DUPLICATE KEY UPDATE
+            `name`='{$data['name']}',`group`='{$data['group']}',`room`='{$data['room']}',`ip`='{$data['ip']}',`date`=NOW();";
+    $res = mysql_query($sql);
+
 }
 
 //print_r($sql);
