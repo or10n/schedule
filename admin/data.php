@@ -17,7 +17,7 @@ else
 	// проверка
 	if ($password === $pass["$user"])
 	{
-                $header = "Вы извесны как " . $user . "";
+                $header = "Вы известны как " . $user . "";
 	}
 	else
 	{
@@ -129,6 +129,7 @@ while ($row=mysql_fetch_row($res)) {
 
     </head>
     <body>
+    <p align="right"><?php echo $header; ?></p>
         <center>
             <?php echo "Этаж: $floor"; ?>
             <table style="width: 90%;">
@@ -168,6 +169,7 @@ while ($row=mysql_fetch_row($res)) {
                             <td style="width: 235px; text-align: center;">Фамилия Имя Отчество</td>
                             <td style="width: 85px; text-align: center;">Группа</td>
                             <td style="width: 50px; text-align: center;">Комн.</td>
+
                         </tr>
                     </table>
                 </td>
@@ -178,6 +180,7 @@ while ($row=mysql_fetch_row($res)) {
                             <td style="width: 235px; text-align: center;">Фамилия Имя Отчество</td>
                             <td style="width: 85px; text-align: center;">Группа</td>
                             <td style="width: 50px; text-align: center;">Комн.</td>
+
                         </tr>
                     </table>
                 </td>
@@ -194,12 +197,10 @@ while ($row=mysql_fetch_row($res)) {
                         <input type="hidden" name="year" value="<?php echo $year; ?>">
                         <input type="hidden" name="day" value="<?php echo $i; ?>">
                         <input type="hidden" name="shift" value="1">
-                        <input type="text" name="name" value="<?php echo $data['1']['name'][$i]; ?>" size="35px">
+                        <input title="<?php echo $data['1']['date'][$i] . ", " . $data['1']['ip'][$i]; ?>" type="text" name="name" value="<?php echo $data['1']['name'][$i]; ?>" size="35px">
                         <input type="text" name="group" value="<?php echo $data['1']['group'][$i]; ?>" size="10px">
                         <input type="text" name="room" value="<?php echo $data['1']['room'][$i]; ?>" size="4px">
-                        <?php if (!$data['1']['name'][$i]) { ?>
-                            <input type="submit" value="Сохранить">
-                        <?php } ?>
+                        <input type="submit" value="Сохранить">
                     </form>
                 </td>
                 <td>
@@ -212,12 +213,10 @@ while ($row=mysql_fetch_row($res)) {
                         <input type="hidden" name="year" value="<?php echo $year; ?>">
                         <input type="hidden" name="day" value="<?php echo $i; ?>">
                         <input type="hidden" name="shift" value="2">
-                        <input type="text" name="name" value="<?php echo $data['2']['name'][$i]; ?>" size="35px">
+                        <input title="<?php echo $data['2']['date'][$i] . ", " .$data['2']['ip'][$i]; ?>" type="text" name="name" value="<?php echo $data['2']['name'][$i]; ?>" size="35px">
                         <input type="text" name="group" value="<?php echo $data['2']['group'][$i]; ?>" size="10px">
                         <input type="text" name="room" value="<?php echo $data['2']['room'][$i]; ?>" size="4px">
-                        <?php if (!$data['2']['name'][$i]) { ?>
-                            <input type="submit" value="Сохранить">
-                        <?php } ?>
+                        <input type="submit" value="Сохранить">
                     </form>
                 </td>
             </tr>
